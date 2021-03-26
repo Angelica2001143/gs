@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guided Study</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            background-color: pink;
+        }
+
+        .container {
+            height: 1500px;
+        }
+
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            width: 80%;
+        }
+
+        .alternate {
+            background-color: green;
+        }
+
+
+        .display {
+            color: blue;
+            font-weight: bold;
+        }
+
+
+        .orange {
+            background-color: orange;
+        }
+
+        .jquery {
+            background-color: #B0E0E6;
+            width: 70px;
+            border: 1px solid red;
+        }
+
+        .block {
+            position: absolute;
+            background-color: yellow;
+            left: 40px;
+            width: 80px;
+            height: 80px;
+            margin: 5px;
+        }
+
+        /* SCROLL BUTTON */
+        #scrollbtn {
+
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        #scrollbtn:hover {
+            background-color: rgb(50, 68, 202);
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <center>
+
+        <h1>Guided Study Exercise</h1>
+
+
+
+        <div class="container">
+
+
+
+            <br>
+            <input type="checkbox" name="accept" class="accept" value="yes"> I accept<br>
+            <input type="submit" value="Submit" class="btn btn-primary submit-btn" name="submit" disabled="disabled">
+
+
+            <br><br>
+            <table>
+                <tbody>
+                    <tr class="alternate">
+                        <th>Student</th>
+                        <th>Grade</th>
+                    </tr>
+                    <tr>
+                        <td>Julius</td>
+                        <td>1.2</td>
+                    </tr>
+                    <tr class="alternate">
+                        <td>Jollina</td>
+                        <td>2.2</td>
+                    </tr>
+                    <tr>
+                        <td>Angel</td>
+                        <td>1.6</td>
+                    </tr>
+                    <tr class="alternate">
+                        <td>Judilyn</td>
+                        <td>2.0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <br>
+            <button class="btn btn-warning recolor">Change Alternate Color</button>
+
+
+            <br><br>
+            <input type="text" name="text-box" class="text-box" maxlength="15">
+            <p><span class="r-chars">15</span> Character(s) remaining.</p>
+
+
+            <br>
+            <div class="display"></div>
+
+
+            <br>
+            <button class="btn btn-primary add-option">Add</button>
+            <select name="dropdown" class="dropdown"></select>
+
+
+            <button class="btn btn-danger remove-option">Remove</button>
+
+            <br><br>
+            <input type="submit" value="Maayong Buntag" class="btn btn-success change">
+
+
+            <br><br>
+            <p>Input Amount:
+                <input type="text" class="numbers">
+            </p>
+
+
+            <button class="btn btn-primary animate">Animate</button><br><br>
+            <p class="jquery">jQuery</p>
+
+
+            <div>
+                <div>
+                    <button class="btn btn-warning up">Up</button>
+                    <button class="btn btn-warning down">Down</button><br><br>
+                    <button class="btn btn-warning left">Left</button>
+                    <button class="btn btn-warning right">Right</button>
+                </div>
+                <div class="block"> HELLO I AM BOX</div>
+            </div>
+
+        </div>
+        <button click="upFunction()" id="scrollbtn"> SCROLL UP</button>
+
+        <script>
+            // Ready document
+            $(document).ready(function () {
+
+                $('.accept').on('click', function () {
+                    if ($('.submit-btn').is(':disabled')) {
+                        $('.submit-btn').removeAttr('disabled');
+                    } else {
+                        $('.submit-btn').attr('disabled', 'disabled');
+                    }
+                })
+
+                $('tr:even').addClass('alternate');
+
+                var maxlength = 15;
+
+                $('.text-box').on('keyup', function () {
+                    var textLength = maxlength - $(this).val().length;
+
+                    $('.r-chars').text(textLength);
+                })
+
+
+                $('.add-option').on('click', function () {
+                    var option = $('.text-box').val();
+
+                    $('.dropdown').append('<option value="' + option + '">' + option + '</option>')
+                })
+
+
+                $('.remove-option').on('click', function () {
+                    var toRemove = $('.dropdown').val();
+
+                    $('.dropdown option[value="' + toRemove + '"]').remove();
+                })
+
+
+                $(".text-box").on('keyup', function () {
+                    var toDisplay = $(this).val();
+
+                    $('.display').text(toDisplay);
+                })
+
+
+                $(".change").on('click', function () {
+                    if ($(".change").val() == "Maayong Buntag") {
+                        $(".change").val("Maayong Gabei");
+                    } else {
+                        $(".change").val("Maayong Buntag");
+                    }
+                })
+
+
+                $('.recolor').on('click', function () {
+                    $('tr:even').removeClass('alternate').addClass('orange');
+                })
+
+
+                $('.numbers').keyup(function () {
+                    this.value = this.value.replace(/[^0-9\.]/g, '');
+                })
+
+
+                $('.animate').click(function () {
+                    $(".jquery").animate({
+                        width: "70%",
+                        opacity: 0.4,
+                        marginLeft: "0.6in",
+                        fontSize: "3em",
+                        borderWidth: "10px"
+                    }, 1500);
+                })
+
+
+                $('.right').click(function () {
+                    $('.block').animate({
+                        left: '+=50px'
+                    }, 'slow');
+                })
+
+                $('.left').click(function () {
+                    $('.block').animate({
+                        left: '-=50px'
+                    }, 'slow');
+                })
+
+                $('.up').click(function () {
+                    $('.block').animate({
+                        top: '-=50px'
+                    }, 'slow');
+                })
+
+                $('.down').click(function () {
+                    $('.block').animate({
+                        top: '+=50px'
+                    }, 'slow');
+                })
+
+            })
+
+            // When the user clicks on the button, scroll to the top of the document
+            $("#scrollbtn").click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, "slow");
+
+            });
+        </script>
+    </center>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>JQUERY</title>
+</head>
+
+<style>
+    body {
+        background-color: hotpink;
+    }
+
+    h4 {
+        padding: 50px;
+    }
+</style>
+
+<body>
+    <center>
+        <br>
+        <div>
+            <h1>BUTTONS FOR TOGGLE, HIDE AND SHOW</h1>
+            <button class="toggle"> TOGGLE BUTTON</button>
+            <button class="hide"> HIDE BUTTON</button>
+            <button class="show"> SHOW BUTTON</button>
+        </div>
+        <br><br>
+        <div>
+            <h2>I WILL FADE (in/out)</h2>
+            <p> SLOW FADE (in/out)</p>
+            <h3> 3 seconds fade (in/out)</h3>
+            <br>
+            <button class="FADEOUT"> FADEOUT BUTTON</button>
+            <button class="FADEIN"> FADE IN BUTTON</button>
+        </div>
+        <br><br>
+        <div>
+            <h4 style="background-color: pink; ">ANIMATE BUTTONS BELOW</h4>
+            <button class="animate">ANIMATE</button>
+
+        </div>
+        <br><br>
+        <div>
+            <h1 class="header"> JQUERY GUIDED STUDY</h1>
+            <input type="text" name="username" id="username">
+            <button type="submit" class="submit">GET AND SET</button>
+        </div>
+
+        <br><br><br>
+        <!-- <select name="select"> options</select> -->
+        <div></div>
+    </center>
+</body>
+
+
+<script>
+    //number1
+    $(document).ready(function () {
+        $(".toggle").click(function () {
+            $("h1").toggle();
+            console.log("toggle");
+        });
+        $(".hide").click(function () {
+            $("h1").hide();
+            console.log("hide");
+        });
+        $(".show").click(function () {
+            $("h1").show();
+            console.log("show");
+        });
+        //number2
+        $(".FADEOUT").click(function () {
+            $("h2").fadeOut();
+            $("p").fadeOut("slow");
+            $("h3").fadeOut(3000);
+        });
+        $(".FADEIN").click(function () {
+            $("h2").fadeIn();
+            $("p").fadeIn("slow");
+            $("h3").fadeIn(3000);
+        });
+        $(".animate").click(function () {
+            $("h4").animate({
+                left: '250px',
+                height: '150px',
+                width: '150px'
+
+            });
+            var text = $('.header').html();
+            console.log(text);
+            //set
+            $(".submit").on('click', function () {
+                $("#username").val(text);
+                console.log(text);
+            });
+            // $('select').on('change'), function(){
+            //$('.header').text($('#select').val());
+            //if($(#select1).val()=="option2"){
+            //}
+            //}
+        });
+    });
+</script>
+
+</html>
